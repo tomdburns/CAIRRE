@@ -1,0 +1,249 @@
+===============================================================================
+Version 0.11.0 (beta)
+-------------------------------------------------------------------------------
+
+- Added JavaCodes directory with CDK and PaDEL codes, with the goal of removing
+  the dependency on OPERA
+
+- Added descriptors.py to scripts which contains the code needed to run PaDEL
+  and CDK directly without needing OPERA. It was then incorporated into 
+  modules.ExecuteModels, meaning the code no longer relies on OPERA to generate
+  descriptors and run models.
+
+- Disabled all OPERA related calls and menus, no longer available in the GUI
+
+- CAIRRE now allows the use of all available Fingerprints for similarity
+  search without the need to run the CAIRRE models.
+
+- Disabled the user "properties" tab since OPERA is no longer being run. This
+  include self.tab2 and self.PropTable
+
+- Added code which executes on launch to check for an existing java installation.
+  if java is not detected, then the code disables any features reliant on the
+  java modules, including all FingerPrints (except pRDF) and the "Run Model"
+  button. Users can still explore the database using the pRDF FingerPrint.
+
+===============================================================================
+Version 0.10.2 (beta)
+-------------------------------------------------------------------------------
+
+- fixed a bug causing the code to exit after running alternate fingerprints
+
+===============================================================================
+Version 0.10.1 (beta)
+-------------------------------------------------------------------------------
+
+- Updated the units in the properties windows, making the output more relevant
+  to chemical evaluators
+
+- Software now pushes an alerts pop-up without needing the user to click to
+  "show alerts" button, with the goal to effectively communicate the alerts
+  to the user.
+
+- Fixed a bug where CAS 9002-93-1 was returning an incorrect SMILES from the
+  CAS Search function.
+
+- Added the option to perform the nearest neighbour search using the
+  descriptors used by the CAIRRE and Oxnard models.
+
+- Updated the negative removal handling in the nearest neighbours search to
+  better align with the methodology used when developing CAIRRE training sets
+
+- Updated user manual to include new functions and features.
+
+- Fixed a bug in the CAS search that was causing CAIRRE to push a connection
+  error when the database successfully returning a None object, meaning CAIRRE
+  was interpreting to result as a failure to properly query the database.
+
+- Fixed a bug that was causing CAIRRE to run the similarity search after the
+  CAS Search function failed.
+
+===============================================================================
+Version 0.10.0 (beta)
+-------------------------------------------------------------------------------
+
+- Updated the table in the Nearest Neighbours windows to include CAS RNs and
+  Median percent removal. The SMILES column was removed as it was deemed not
+  useful.
+
+- Fixed a bug in the domain check that was reversing the regression and
+  classification models.
+
+- Added CAIRRE_v2 regression model, based on updated fitting from the 2022
+  eSMR document, using OPERA descriptors and N>2 measurements.
+
+- Changed the Model Statistics plots from scatter plots to hexbins
+
+- Changed the default models being displayed to the user
+
+- Reduced the size of the nearest neighbour results table and added
+  a table below the displays the weighted average of the N nearest neighbours
+
+- Added an options tab to the Nearest Neighbour window to allow the user
+  to fine tune the search, although with the exception of the number of
+  chemicals included in the weighted average, none of these options are
+  currently functional.
+
+- Added tab to NN results window for substructure search, added "coming soon"
+  message to tab since this functionality has not been added to the code.
+
+- Added function to Backend.py called filter_array that filter's a chemical's
+  experimental removal array according to the settings defined by the user;
+  updated the surrounding code to accommodate the new format of the db search
+
+===============================================================================
+Version 0.9.1 (beta)
+-------------------------------------------------------------------------------
+
+- Added a class to main called SystemDPI that checks the windows UI scaling
+  settings of the user and determines the scaling factor for CAIRRE's GUI
+- Applied the dpi.scale factor across the GUI setup to allow for dynamic scaling
+  based on the largest scaling factor detected (IE code uses largest factor when
+  multiple monitors are in use.)
+- Modified the lines in the UI to not look ridiculous at other scales
+
+===============================================================================
+Version 0.9.0 (beta)
+-------------------------------------------------------------------------------
+
+- Added function that allows the user to search by CAS RN that considers the
+  complete dataset used for CAIRRE, as well as performs an internet search
+  for the CAS RN or the SMILES
+  -> modified the UI to incorporate this functionality
+  -> added a toolbar menu option to allow the user to toggle the online
+     functionality on and off
+  -> added a toolbar menu option to automatically run a similarity search
+     using pRDF function
+
+===============================================================================
+Version 0.8.2 (beta)
+-------------------------------------------------------------------------------
+
+- Added option in "About" menu to look at the descriptors in the models
+  -> This button opens a file called desc.pdf which is one of the SI documents
+     for the CAIRRE publication describing the descriptors.
+
+===============================================================================
+Version 0.8.1 (beta)
+-------------------------------------------------------------------------------
+
+- Added fault tolerances for failed OPERA calculations in single substance
+  calculations
+
+- Added Rerun OPERA checkbox that will be used to force the rerun of OPERA
+  calculations when a run fails
+
+- Adjusted experimental removal histogram bins to make the distribution of
+  percent removals to be more clear, now has fixed bin sizes
+  (10 bins, 10% per bin)
+
+===============================================================================
+Version 0.8.0 (beta)
+-------------------------------------------------------------------------------
+
+- Added double click functionality to training set table.
+
+- Added fault tolerances for failed calculations due to NaN values in
+  descriptor arrays
+
+- Added code to click_search function to accommodate the new fingerprint types
+  > Added function to scripts.Backend.py: closest2, which can handle the new
+    fingerprint types
+  > Added error message when an OPERA based descriptor is chosen as the
+    fingerprint, when no OPERA data available for user's substance
+
+- Created the scripts.fprint_handler.py file that contains functions needed
+  to import the fingerprint information from OPERA
+
+- Fixed a bug where several database substances had NaN'ed phys-chem
+  properties by recalculating those properties with OPERA
+
+- Changed the scale of the nearest neighbour histograms to read from 0 to 100%
+
+- Added a tab widget to the main window in the Nearest Neighbour section, with
+  the structure of the neighbour molecule in one window and the phys-chem
+  properties in the other.
+
+- Added a tab widget to the main window, with the structure on one tab, and
+  a readout of some selected phys-chem properties calculated using OPERA for
+  the user's substance
+  - Also added a new function to update the table when data becomes available
+
+- Removed the MW check box in the main GUI, however the code remains in the
+  app intact for now.
+
+===============================================================================
+Version 0.7.2 (beta)
+-------------------------------------------------------------------------------
+
+- Removed extra files from directory that are no longer used by code
+
+- Changed the default paths that file dialog windows start at to improve QoL
+
+- Updated file explorer window titles to be descriptive of its purpose.
+
+- Added function linked to Publication option in menubar called get_publication()
+  in main.py that opens data\Pub.pdf.
+  -> Current placeholder pdf created, will be updated once the work has been
+     published.
+
+- Updated/Tested code with OPERA CL v2.8 (the most up to date version at the
+  time of this update)
+  -> NOTE: CAME ACROSS A WEIRD BUG THAT CAUSED CRASH
+           - CANNOT GUARANTEE 2.8 WILL WORK
+
+- Added function linked to 'Download OPERA CL v2.7' menubar option called
+  download_opera() in main.py that directly downloads the correct version
+  of OPERA CL
+  - Changed link from official OPERA github to my personal google descriptive
+  - Version on Github is currently only 2.8 (see above issue with v2.8)
+
+- Added two warnings when file opens in new function check_opera():
+  -> warning 1: OPERA_PATH.ini not found
+  -> warning 2: OPERA.exe path does not exist
+  check_opera() runs as soon as the UI is loaded.
+
+- Added function linked to 'Set OPERA CL Path' item in menu called set_opera_path
+  so that the user can now set the path to the opera exe from inside the program
+  without having to manually edit exe files.
+
+- Added a menu bar with two columns: OPERA and About
+  -> In OPERA: Set OPERA CL Path, Download OPERA CL v2.8
+  -> In About: Publications
+
+- Fixed a typo in batch output file column name
+
+- Fixed a bug that would cause the whole program to crash when saving a batch
+  output file, and attempting to overwrite an open file (permission error)
+
+- Fixed bug in batch code causing it to throw out of domain errors when
+  substance was within domain
+
+- Added EAD-ECCC label to bottom right of main window
+
+- Added prdf variable to the Substance object in Substances.py
+
+- Added code to main.py clickSearch function to save the prdf to the history file
+
+===============================================================================
+Version 0.7.1 (beta)
+-------------------------------------------------------------------------------
+
+- Install Instructions:
+  - Updated Install Instructions
+  - Added Install Instructions copy to compile.py
+
+- User Manual:
+  - Added a function to open the user manual and linked it to button.
+  - Updated and included the user manual in the source code directory.
+  - Added User manual copy to compile.py
+
+- Added mw_infobox() function to main.py and linked it to the mw infobox in the 
+  main UI window. This box contains information on the use of this optional
+  setting.
+
+- Added plt.clf() and plt.cla() to the regression stats function of main.py
+  to fix a bug where previous data would get included in the plots
+  (including the hist plots)
+
+===============================================================================
