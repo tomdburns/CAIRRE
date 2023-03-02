@@ -1,6 +1,6 @@
 # CAIRRE
  
- The Canadian A.I. Removal Rate Estimator (CAIRRE) is an A.I. tool developed for chemical evaluators to estimate the removal efficiency of a chemical from secondary wastewater treatment systems. Using experimental monitoring data gathered from Canadian and Californian wastewater treatment facilities, and supplimented using monitoring data found in literature, CAIRRE uses gradient boosted regression algorithms to provide the user with a site-agnostic removal efficientcy prediction.
+ The Canadian A.I. Removal Rate Estimator (CAIRRE) is an A.I. tool developed for chemical evaluators to estimate the removal efficiency of a chemical from secondary wastewater treatment systems. Using experimental monitoring data gathered from Canadian and Californian wastewater treatment facilities, and supplimented using monitoring data found in literature, CAIRRE uses gradient boosted regression algorithms to provide the user with a site-agnostic removal efficiency prediction.
  
 == To Install ==
 
