@@ -1,4 +1,32 @@
 ===============================================================================
+Version 0.12.1 (beta)
+-------------------------------------------------------------------------------
+
+- Fixed a minor bug causing the substructure search to not automatically update
+  the resulting structure and histograms after the search was performed.
+
+- Updated the PaDEL Code to remove the dependency on Log4J
+
+===============================================================================
+Version 0.12.0 (beta)
+-------------------------------------------------------------------------------
+
+- Added two functions to Backend.py with an alternate method of determining
+  chemical similarity using a maximum common substructure search, and ranking
+  the chemicals using a scoring function. (score=0.5(Nc/Na + Nc/Nb) where Na,
+  Nb, and Nc are the number of atoms in chem a, b, and the maximum common
+  substructure c. This score will replace the Tanimoto for this method.
+
+- Implemented the MCS search in the Nearest Neighbour Analysis window.
+
+- CAIRRE no longer force pRDF as the default when smiles is converted, to an
+  image or a model is run. It will instead always run the neighbour search with
+  whichever print the user had selected.
+
+- Implemented the substructure search into the GUI for looking at specific
+  substructures instead of full chemicals.
+
+===============================================================================
 Version 0.11.0 (beta)
 -------------------------------------------------------------------------------
 
